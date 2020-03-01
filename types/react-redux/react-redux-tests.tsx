@@ -54,6 +54,19 @@ function Empty() {
     const verify = <Test foo='bar' />;
 }
 
+function EmptyFunctionComponent() {
+    interface OwnProps {
+        foo: string;
+    }
+
+    const TestFunctionComponent: React.FunctionComponent<OwnProps> = (props) => null;
+
+    const Test = connect()(TestFunctionComponent);
+
+    // const verify = <Test foo='bar' />;
+    const invalid = <Test foo={5} />;
+}
+
 function MapState() {
     interface OwnProps { foo: string; }
     interface StateProps { bar: number; }
