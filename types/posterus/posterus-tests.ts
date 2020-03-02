@@ -1,17 +1,20 @@
 import { Future } from 'posterus';
 import { fiber } from 'posterus/fiber';
 
+const anyFuture = new Future();
+anyFuture.settle(undefined, 10);
+anyFuture.settle(undefined, 'foo');
+anyFuture.settle('not an Error'); // $ExpectError
+
 const future = new Future<string>();
 future.settle(undefined, 'result');
-// $ExpectError
-future.settle(undefined, 10);
+future.settle(undefined, 10); // $ExpectError
 
 const undefinedResult = Future.fromResult();
 
 const futureString = future.mapResult<string>(() => 'result');
 
-// $ExpectError
-const futureWrongType = future.mapResult<string>(() => 9000);
+const futureWrongType = future.mapResult<string>(() => 9000); // $ExpectError
 
 function* generatorTask() {
     yield Promise.resolve();
