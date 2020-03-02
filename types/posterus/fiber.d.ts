@@ -1,3 +1,3 @@
 import { Future } from './index';
 
-export function fiber<T = any>(iterator: IterableIterator<T>): Future<T>;
+export function fiber(iterator: IterableIterator<any>): Future;
